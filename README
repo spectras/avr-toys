@@ -1,0 +1,16 @@
+Prerequisites
+#############
+
+    sudo apt-get install cmake gcc-avr binutils-avr avr-libc avrdude
+
+Compiling
+#########
+
+    cd build
+    cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+    make
+
+Uploading
+#########
+
+    make upload PORT=/dev/tty/ACM0
