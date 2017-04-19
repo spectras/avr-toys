@@ -43,8 +43,7 @@ function(add_avr_executable NAME)
         DEPENDS ${NAME}
         COMMENT "Extracting eeprom section into ${NAME}.eeprom"
     )
-
-    add_custom_target(upload
+    add_custom_target(upload-${NAME}
         COMMAND ${CMAKE_AVR_UPLOADER} ${AVR_UPLOAD_FLAGS} -U flash:w:${NAME}.main:i -U eeprom:w:${NAME}.eeprom:i
         DEPENDS ${NAME}.main ${NAME}.eeprom
         COMMENT "Uploading ${NAME} to ${AVR_PART} microcontroller"

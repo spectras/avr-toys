@@ -1,0 +1,25 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+// Define hardware configuration
+
+#cmakedefine CLOCK          @CLOCK@
+#define TICK_HZ             250u
+
+// Segments
+
+#define SEGMENTS_DATA           2
+#define SEGMENTS_DATA_BIT       0
+#define SEGMENTS_STROBE         4
+#define SEGMENTS_STROBE_BIT     4
+#define SEGMENTS_DOT            2
+#define SEGMENTS_DOT_BIT        4
+
+// Buttons
+
+#define BUTTON0     4
+#define BUTTON0_BIT 2
+#define BUTTON1     4
+#define BUTTON1_BIT 3
+
+#endif
