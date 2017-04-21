@@ -1,8 +1,8 @@
 #include <avr/io.h>
+#include <tools/math.h>
 #include "config.h"
 #include "io.h"
 #include "segments.h"
-#include "utils.h"
 
 // Externally-demuliplexed segments
 //  => use 4 ports for data
@@ -30,7 +30,7 @@ void segments_stop()
 
 void segments_set_value(uint16_t value, int8_t decs)
 {
-    bin2bcd(value, values);
+    bin2bcd4(value, values);
     decimals = decs;
 }
 
