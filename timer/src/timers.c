@@ -21,25 +21,25 @@
 #define PRESCALER   2
 #define DIVIDER     CLOCK_RATIO/8
 
-#elif CLOCK_RATIO < 256 * 8 * 4
+#elif CLOCK_RATIO < 256 * 32
 #define PRESCALER   3
-#define DIVIDER     CLOCK_RATIO/8/4
+#define DIVIDER     CLOCK_RATIO/32
 
-#elif CLOCK_RATIO < 256 * 8 * 4 * 2
+#elif CLOCK_RATIO < 256 * 64
 #define PRESCALER   4
-#define DIVIDER     CLOCK_RATIO/8/4/2
+#define DIVIDER     CLOCK_RATIO/64
 
-#elif CLOCK_RATIO < 256 * 8 * 4 * 2 * 2
+#elif CLOCK_RATIO < 256 * 128
 #define PRESCALER   5
-#define DIVIDER     CLOCK_RATIO/8/4/2/2
+#define DIVIDER     CLOCK_RATIO/128
 
-#elif CLOCK_RATIO < 256 * 8 * 4 * 2 * 2 * 2
+#elif CLOCK_RATIO < 256 * 256
 #define PRESCALER   6
-#define DIVIDER     CLOCK_RATIO/8/4/2/2/2
+#define DIVIDER     CLOCK_RATIO/256
 
-#elif CLOCK_RATIO < 256 * 8 * 4 * 2 * 2 * 2 * 4
+#elif CLOCK_RATIO < 256 * 1024
 #define PRESCALER   7
-#define DIVIDER     CLOCK_RATIO/8/4/2/2/2/4
+#define DIVIDER     CLOCK_RATIO/1024
 
 #else
 #error TICK_HZ is too low for CLOCK
@@ -58,7 +58,7 @@ void tick_init()
 
     // Configure timings
     TCCR2A  = (1<<WGM21);   // Set CTC mode
-    OCR2A   = DIVIDER;      // Set CTC max value
+    OCR2A   = DIVIDER - 1;  // Set CTC max value
     TIMSK2  = (1<<OCIE2A);  // Timer will generate interrupts on comparator A match
     GTCCR   = (1<<PSRASY);  // Reset prescaler
 

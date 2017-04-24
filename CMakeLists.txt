@@ -6,7 +6,9 @@ project(avr C)
 ##############################################################################
 # Options
 
-set(CLOCK 16000000)
+if(NOT CLOCK)
+    set(CLOCK 16000000)
+endif()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -std=c99")
 
 add_subdirectory(tools)
