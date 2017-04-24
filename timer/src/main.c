@@ -1,6 +1,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/sleep.h>
+#include <string.h>
 
 #include "config.h"
 #include "io.h"
@@ -18,18 +19,20 @@ int main (void)
 
     PORT(BUTTON0)   |= (1 << BUTTON0_BIT);
     PORT(BUTTON1)   |= (1 << BUTTON1_BIT);
+    CLKPR = 0x80;
+    CLKPR = 0x06;
 
     segments_init();
     tick_init();
     sei();
 
-    uint16_t x = 0;
+    uint8_t x[4] = {0, 0, 0, 0};
     bool freeze_pressed = false;
     bool frozen = true;
 
     for(;;) {
-        segments_set_value(x, 1);
-        tick_wait(100, SLEEP_MODE_PWR_SAVE);
+        segments_set_figures(x, 1);
+        tick_wait(100, SLEEP_MODE_IDLE);
 
         if ((PIN(BUTTON1) & (1 << BUTTON1_BIT)) == 0) {
             if (!freeze_pressed) {
@@ -41,9 +44,22 @@ int main (void)
         }
 
         if ((PIN(BUTTON0) & (1 << BUTTON0_BIT)) == 0) {
-            x = 0;
+            memset(x, 0, sizeof(x));
         } else {
-            if (!frozen) { x += 1; }
+            if (!frozen) {
+                if (++x[0] == 10) {
+                    x[0] = 0;
+                    if (++x[1] == 10) {
+                        x[1] = 0;
+                        if (++x[2] == 10) {
+                            x[2] = 0;
+                            if (++x[3] == 10) {
+                                x[3] = 0;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
