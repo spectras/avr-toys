@@ -1,6 +1,14 @@
 #include "config.h"
 
-    .section .text.wait32,"ax",@progbits
+    .section .text.waitx,"ax",@progbits
+
+    .global wait16
+
+wait16:
+    movw    r22, r24
+    clr     r24
+    clr     r25
+    ;rjmp    wait32          ; implicit
 
     .global wait32
 

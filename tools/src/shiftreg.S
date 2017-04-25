@@ -13,6 +13,7 @@ value = 22
 port_value = 23
 counter = 26
 
+    ; Total cycles => (3 for rcall) + 12 + 91 + 4 = 110
     ; r24-r25  => reg
     ; r22 => value
 shiftreg_send:
@@ -30,7 +31,7 @@ shiftreg_send:
     ldi     counter, 8
 
 .Lshiftreg_loop:
-    ; Output data bit
+    ; Output data bit - 5*8 cycles
     sbrs    value, 7
     and     port_value, data_mask_inv       ; 0 out data bit if carry clear
     sbrc    value, 7
@@ -38,15 +39,14 @@ shiftreg_send:
     st      Z, port_value                   ; write data bit
 
     ; Generate rising edge on strobe
-    or      port_value, strobe_mask
-    st      Z, port_value
+    or      port_value, strobe_mask         ; 8
+    st      Z, port_value                   ; 8
 
     ; Restore strobe and loop
-    and     port_value, strobe_mask_inv
-    lsl     value                           ; move next bit into bit 7
-    dec     counter
-    st      Z, port_value
-    brne    .Lshiftreg_loop
+    and     port_value, strobe_mask_inv     ; 8
+    lsl     value                           ; 8  ; move next bit into bit 7
+    dec     counter                         ; 8
+    st      Z, port_value                   ; 8
+    brne    .Lshiftreg_loop                 ; 15
 
     ret
-

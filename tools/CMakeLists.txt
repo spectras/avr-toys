@@ -10,6 +10,7 @@ project(tools ASM C)
 include_directories("${PROJECT_BINARY_DIR}" "include")
 
 set(tools_SRCS
+    src/lcd1602.c
     src/math.c
     src/shiftreg.S
     src/wait.S

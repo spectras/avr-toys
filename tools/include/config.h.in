@@ -4,5 +4,10 @@
 // Define hardware configuration
 
 #cmakedefine CLOCK          @CLOCK@
+#cmakedefine VOLTAGE        @VOLTAGE@
+
+#ifndef VOLTAGE
+#define VOLTAGE 5
+#endif
 
 #endif
