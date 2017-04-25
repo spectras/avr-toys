@@ -11,6 +11,8 @@ include_directories("${PROJECT_BINARY_DIR}" "include")
 
 set(tools_SRCS
     src/math.c
+    src/shiftreg.S
+    src/wait.S
 )
 
 configure_file("include/config.h.in" "config.h")
