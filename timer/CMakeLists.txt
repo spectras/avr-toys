@@ -1,13 +1,10 @@
 # AVR Project
 #
-cmake_minimum_required(VERSION 2.8)
-project(timer C)
+cmake_minimum_required(VERSION 3.0)
+project(timer LANGUAGES C)
 
 ##############################################################################
 # Sources
-
-# Look for header files in build directory (for config.h) and include dir
-include_directories("${PROJECT_BINARY_DIR}" "include")
 
 set(timer_SRCS
     src/main.c
@@ -15,14 +12,12 @@ set(timer_SRCS
     src/timers.c
 )
 
-set(timer_DEPS
-    tools
-)
-
 configure_file("include/config.h.in" "config.h")
+include_directories("${PROJECT_BINARY_DIR}")
 
 ##############################################################################
 # Targets
 
 add_avr_executable(${PROJECT_NAME} ${timer_SRCS})
-target_link_libraries(${PROJECT_NAME} ${timer_DEPS})
+target_include_directories(${PROJECT_NAME} PRIVATE "include")
+target_link_libraries(${PROJECT_NAME} tools)

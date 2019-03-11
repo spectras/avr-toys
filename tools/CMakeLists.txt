@@ -1,13 +1,10 @@
 # AVR Project
 #
-cmake_minimum_required(VERSION 2.8)
-project(tools ASM C)
+cmake_minimum_required(VERSION 3.0)
+project(tools LANGUAGES ASM C)
 
 ##############################################################################
 # Sources
-
-# Look for header files in build directory (for config.h) and include dir
-include_directories("${PROJECT_BINARY_DIR}" "include")
 
 set(tools_SRCS
     src/lcd1602.c
@@ -17,6 +14,7 @@ set(tools_SRCS
 )
 
 configure_file("include/config.h.in" "config.h")
+include_directories("${PROJECT_BINARY_DIR}")
 
 ##############################################################################
 # Targets

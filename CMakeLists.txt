@@ -1,7 +1,7 @@
 # AVR Project
 #
-cmake_minimum_required(VERSION 2.8)
-project(avr C)
+cmake_minimum_required(VERSION 3.0)
+project(avr LANGUAGES C)
 
 ##############################################################################
 # Options
@@ -9,7 +9,7 @@ project(avr C)
 if(NOT CLOCK)
     set(CLOCK 16000000)
 endif()
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -std=c99")
+add_compile_options(-Wall -Wextra -Werror -std=c99)
 
 add_subdirectory(tools)
 
