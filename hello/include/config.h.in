@@ -1,0 +1,15 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+// Define hardware configuration
+
+#cmakedefine CLOCK          @CLOCK@
+#define TICK_HZ             200u
+
+// Shifter
+#define SHIFTER_DATA_BIT    4
+#define SHIFTER_STROBE_BIT  6
+#define SHIFTER_OUTPUT_BIT  5
+#define SCREEN_RS_BIT       7
+
+#endif
