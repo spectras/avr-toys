@@ -17,10 +17,12 @@ int main (void)
         | (1<<PRTIM1)
         | (1<<PRADC);
 
-    PORT(BUTTON0)   |= (1 << BUTTON0_BIT);
-    PORT(BUTTON1)   |= (1 << BUTTON1_BIT);
-    CLKPR = 0x80;
-    CLKPR = 0x06;
+    DDR(BUTTON0)    &= ~(1 << BUTTON0_BIT); /* make it input */
+    DDR(BUTTON1)    &= ~(1 << BUTTON1_BIT); /* make it input */
+    PORT(BUTTON0)   |= (1 << BUTTON0_BIT);  /* enable pull-up resistor */
+    PORT(BUTTON1)   |= (1 << BUTTON1_BIT);  /* enable pull-up resistor */
+    CLKPR = 0x80;                           /* reset clock prescaler */
+    CLKPR = 0x06;                           /* set clock prescaler to 64 */
 
     segments_init();
     tick_init();

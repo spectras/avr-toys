@@ -8,18 +8,18 @@
 
 // Segments
 
-#define SEGMENTS_DATA           2
+#define SEGMENTS_DATA           2   // port (1=A, ...)
 #define SEGMENTS_DATA_BIT       0
-#define SEGMENTS_STROBE         4
+#define SEGMENTS_STROBE         4   // port (1=A, ...)
 #define SEGMENTS_STROBE_BIT     4
-#define SEGMENTS_DOT            2
+#define SEGMENTS_DOT            2   // port (1=A, ...)
 #define SEGMENTS_DOT_BIT        4
 
 // Buttons
 
-#define BUTTON0     4
+#define BUTTON0     4   // port (1=A, ...)
 #define BUTTON0_BIT 2
-#define BUTTON1     4
+#define BUTTON1     4   // port (1=A, ...)
 #define BUTTON1_BIT 3
 
 #endif

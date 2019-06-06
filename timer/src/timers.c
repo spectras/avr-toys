@@ -60,9 +60,9 @@ void tick_init()
     TCCR2A  = (1<<WGM21);   // Set CTC mode
     OCR2A   = DIVIDER - 1;  // Set CTC max value
     TIMSK2  = (1<<OCIE2A);  // Timer will generate interrupts on comparator A match
-    GTCCR   = (1<<PSRASY);  // Reset prescaler
 
     // Start timer
+    GTCCR   = (1<<PSRASY);  // Reset prescaler
     TCNT2   = 0;            // Reset timer
     TCCR2B  = PRESCALER;    // Set prescaler factor and enable timer
 }
